@@ -19,15 +19,15 @@ router.post('/books', async (req, res) => {
     }
 });
 
-// Get all books
-// router.get('/books', async (req, res) => {
-//     try {
-//         const books = await Book.find();
-//         res.status(200).json(books);
-//     } catch (error) {
-//         res.status(500).json({ message: "Error fetching books", error });
-//     }
-// });
+
+router.get('/books', async (req, res) => {
+    try {
+        const books = await Book.find();
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching books", error });
+    }
+});
 
 // // Get a book by ID
 // router.get('/books/:id', async (req, res) => {
@@ -56,16 +56,16 @@ router.post('/books', async (req, res) => {
 // });
 
 // // Delete a book by ID
-// router.delete('/books/:id', async (req, res) => {
-//     try {
-//         const deletedBook = await Book.findByIdAndDelete(req.params.id);
-//         if (!deletedBook) {
-//             return res.status(404).json({ message: "Book not found" });
-//         }
-//         res.status(200).json({ message: "Book deleted successfully", data: deletedBook });
-//     } catch (error) {
-//         res.status(500).json({ message: "Error deleting book", error });
-//     }
-// });
+router.delete('/books/:id', async (req, res) => {
+    try {
+        const deletedBook = await Book.findByIdAndDelete(req.params.id);
+        if (!deletedBook) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+        res.status(200).json({ message: "Book deleted successfully", data: deletedBook });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting book", error });
+    }
+});
 
 module.exports = router;
