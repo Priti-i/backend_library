@@ -46,6 +46,16 @@ catch(err){
 console.log(err);}
   
 })
+app.get('/register', async (req, res) => {
+  try {
+    const users = await User.find(); // Fetch all users from the database
+    res.status(200).json(users); // Respond with the users
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: "Error fetching users", error });
+  }
+});
+
 
 // User login
 app.post('/register/login', async (req, res) => {
@@ -71,7 +81,7 @@ app.post('/register/login', async (req, res) => {
 });
 
 
-// book
+// add book
 app.post('/books', async (req, res) => {
   try {
       console.log("Book data received:", req.body);
@@ -85,7 +95,7 @@ app.post('/books', async (req, res) => {
 
       const newBook = new Book(bookinfo);
       const savedBook = await newBook.save();
-      res.status(201).json({ message: "Book created successfully", data: savedBook });
+      res.status(201).json({ message: "Book successfully Added", data: savedBook });
   } catch(err){
     console.log(err);}
 });
@@ -99,6 +109,8 @@ app.get('/books', async (req, res) => {
       res.status(500).json({ message: "Error fetching books", error });
   }
 });
+// get user
+
 
 //delete book
 app.delete("/books/:id", async (req, res) => {
